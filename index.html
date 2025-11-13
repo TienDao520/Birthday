@@ -63,10 +63,10 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         /* Unique positions and rotations for photos */
-        .photo:nth-child(1) { top: 10%; left: 5%; transform: rotate(-10deg); }
-        .photo:nth-child(2) { top: 15%; right: 1%; transform: rotate(15deg); }
-        .photo:nth-child(3) { bottom: 20%; left: 8%; transform: rotate(5deg); }
-        .photo:nth-child(4) { bottom: 15%; right: 12%; transform: rotate(-8deg); }
+        .photo:nth-child(1) { top: 5%; left: 1%; transform: rotate(-10deg); }
+        .photo:nth-child(2) { top: 15%; right: 1%; transform: rotate(5deg); }
+        .photo:nth-child(3) { bottom: 5%; left: 8%; transform: rotate(5deg); }
+        .photo:nth-child(4) { bottom: 10%; right: 5%; transform: rotate(-8deg); }
         .photo:nth-child(5) { top: 10%; left: 15%; transform: rotate(12deg); }
         .photo:nth-child(6) { top: 15%; right: 20%; transform: rotate(-15deg); }
 
@@ -123,14 +123,15 @@
 <body>
     <canvas id="confetti-canvas"></canvas>
     <div class="card">
-        <h1>Happy Birthday, Bin! 🎂💜</h1>
-        <p>Here's to celebrating you with magical flowers and endless joy! I love you!</p>
+        <h1 style="z-index: 999;">Happy Birthday, Bin! 🎂💜</h1>
+        <p>Here's to celebrating you with magical flowers and endless joy! </p>
+        <p>I love you!</p>
     </div>
-    <div class="photo" style="z-index: 999;"><img src="./images/1.jpg" alt="" width="200px" height="220px"></div>
-    <div class="photo" style="z-index: 999;"><img src="./images/2.jpg" alt="" width="200px" height="220px"></div>
-    <div class="photo" style="z-index: 999;"><img src="./images/3.jpg" alt="" width="200px" height="220px"></div>
-    <div class="photo" style="z-index: 999;"><img src="./images/4.png" alt="" width="200px" height="250px"></div>
-    <div class="photo" style="z-index: 999; top:18%"><img src="./images/5.jpg" alt="" width="200px" height="220px"></div>
+    <div class="photo" style="z-index: 9;"><img src="./images/1.jpg" alt="" width="200px" height="220px"></div>
+    <div class="photo" style="z-index: 9;"><img src="./images/2.jpg" alt="" width="200px" height="220px"></div>
+    <div class="photo" style="z-index: 9;"><img src="./images/3.jpg" alt="" width="200px" height="220px"></div>
+    <div class="photo" style="z-index: 9;"><img src="./images/4.png" alt="" width="200px" height="250px"></div>
+    <div class="photo" style="z-index: 9; top:18%"><img src="./images/5.jpg" alt="" width="200px" height="220px"></div>
     <div class="photo" ><img src="./images/6.jpg" alt="" width="500" height="600"></div>
 
     <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 10%; animation-delay: 0s;">
