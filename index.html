@@ -5,153 +5,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday, Bin! 🎉</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #6a0dad, #1e90ff); /* Purple to Blue gradient */
+            background: linear-gradient(135deg, #6a0dad, #1e90ff);
             color: white;
             overflow: hidden;
             position: relative;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: 80%;
-            max-width: 1000px;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            backdrop-filter: blur(5px);
-            z-index: 1;
             padding: 20px;
         }
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+            width: 94%;
+            max-width: 1000px;
+            padding: 45px 25px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            z-index: 10;
+        }
         h1 {
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px #000;
+            font-size: clamp(2.3rem, 10vw, 5.5rem);
+            text-shadow: 4px 4px 12px #000;
             animation: glow 2s ease-in-out infinite alternate;
-            margin: 10px 0;
-            z-index: 2;
+            margin-bottom: 25px;
+            line-height: 1.1;
         }
         p {
-            font-size: 1.2em;
-            text-align: center;
-            margin: 10px 0;
-            z-index: 2;
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            margin: 18px 0;
+            line-height: 1.7;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+
+        /* PHOTO CONTAINER - SAFE ZONE (AVOIDS CORNERS) */
+        .photo-container {
+            position: absolute;
+            top: 12%; left: 8%; right: 8%; bottom: 12%;
+            pointer-events: none;
+            z-index: 1;
         }
         .photo {
             position: absolute;
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.3);
-
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-   
-            font-size: 0.8em;
-            text-align: center;
-            z-index: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            backdrop-filter: blur(8px);
+            pointer-events: auto;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
         }
-        /* Unique positions and rotations for photos */
-        .photo:nth-child(1) { top: 5%; left: 1%; transform: rotate(-10deg); }
-        .photo:nth-child(2) { top: 15%; right: 1%; transform: rotate(5deg); }
-        .photo:nth-child(3) { bottom: 5%; left: 8%; transform: rotate(5deg); }
-        .photo:nth-child(4) { bottom: 10%; right: 5%; transform: rotate(-8deg); }
-        .photo:nth-child(5) { top: 10%; left: 15%; transform: rotate(12deg); }
-        .photo:nth-child(6) { top: 15%; right: 20%; transform: rotate(-15deg); }
-
-        .flower {
-            position: absolute;
-            width: 50px;
-            animation: fall 5s infinite;
-            z-index: 0;
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+            background: #fff;
         }
+
+        /* RESPONSIVE PHOTO SIZES */
+        @media (max-width: 480px) {
+            .photo { width: 78px; height: 105px; padding: 5px; border-width: 3px; }
+        }
+        @media (min-width: 481px) and (max-width: 768px) {
+            .photo { width: 95px; height: 135px; }
+        }
+        @media (min-width: 769px) {
+            .photo { width: 115px; height: 165px; }
+        }
+
+        /* SUPER SAFE POSITIONS - NO OVERLAP WITH ICONS */
+        .photo:nth-child(1) { top: 5%; left: 8%; transform: rotate(-14deg); }
+        .photo:nth-child(2) { top: 8%; right: 10%; transform: rotate(12deg); }
+        .photo:nth-child(3) { bottom: 15%; left: 12%; transform: rotate(10deg); }
+        .photo:nth-child(4) { bottom: 18%; right: 12%; transform: rotate(-15deg); }
+        .photo:nth-child(5) { top: 28%; left: 15%; transform: rotate(20deg); }
+        .photo:nth-child(6) { top: 35%; right: 18%; transform: rotate(-18deg); }
+
+        /* ICONS - LOCKED TO CORNERS, NEVER TOUCH PHOTOS */
         .scorpio {
             position: absolute;
-            width: 80px;
-            top: 5%;
-            right: 5%;
+            width: 90px !important;
+            top: 5% !important;
+            right: 5% !important;
+            z-index: 15;
+            filter: drop-shadow(0 0 20px #ff1493);
             animation: pulse 2s infinite;
-            z-index: 0;
         }
         .pharmacy {
             position: absolute;
-            width: 60px;
-            bottom: 5%;
-            left: 5%;
-            animation: bounce 1.5s infinite;
-            z-index: 0;
+            width: 80px !important;
+            bottom: 5% !important;
+            left: 5% !important;
+            z-index: 15;
+            filter: drop-shadow(0 0 20px #00ffff);
+            animation: bounce 1.8s infinite;
         }
+
+        /* FALLING FLOWERS - MORE SPREAD */
+        .flower {
+            position: absolute;
+            width: 60px;
+            animation: fall linear infinite;
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(0 0 15px #ff69b4);
+        }
+
         #confetti-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 3;
+            z-index: 20;
         }
+
+        /* ANIMATIONS */
         @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493; }
+            from { text-shadow: 0 0 25px #fff, 0 0 40px #ff69b4; }
+            to { text-shadow: 0 0 40px #fff, 0 0 60px #ff1493; }
         }
         @keyframes fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-150px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
         }
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.4) rotate(10deg); }
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-35px); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+            50% { transform: translateY(-15px) rotate(var(--r, 0deg)); }
         }
     </style>
 </head>
 <body>
     <canvas id="confetti-canvas"></canvas>
-    <div class="card">
-        <h1 style="z-index: 999;">Happy Birthday, Bin! 🎂💜</h1>
-        <p>Here's to celebrating you with magical flowers and endless joy! </p>
-        <p>I love you!</p>
-    </div>
-    <div class="photo" style="z-index: 9;"><img src="./images/1.jpg" alt="" width="120px" height="180px"></div>
-    <div class="photo" style="z-index: 9;"><img src="./images/2.jpg" alt="" width="120px" height="180px"></div>
-    <div class="photo" style="z-index: 9;"><img src="./images/3.jpg" alt="" width="120px" height="180px"></div>
-    <div class="photo" style="z-index: 9;"><img src="./images/4.png" alt="" width="120px" height="250px"></div>
-    <div class="photo" style="z-index: 9; top:18%"><img src="./images/5.jpg" alt="" width="150px" height="200px"></div>
-    <div class="photo" ><img src="./images/6.jpg" alt="" width="500" height="600"></div>
 
-    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 10%; animation-delay: 0s;">
-    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 30%; animation-delay: 1s;">
-    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 50%; animation-delay: 2s;">
-    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 70%; animation-delay: 3s;">
-    <img src="https://img.icons8.com/color/96/scorpio.png" class="scorpio">
-    <img src="https://img.icons8.com/color/96/pill.png" class="pharmacy">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <!-- MAIN CARD -->
+    <div class="card">
+        <h1>Happy Birthday, Bin! 🎂💜</h1>
+        <p>Here's to celebrating you with magical flowers and endless joy!</p>
+        <p>I love you more than words can say! 💕✨</p>
+    </div>
+
+    <!-- 6 PHOTOS - 100% VISIBLE, NO OVERLAP -->
+    <div class="photo-container">
+        <div class="photo" style="top: 5%; left: 8%; --r: -14deg;">
+            <img src="./images/1.jpg" alt="Memory 1" loading="lazy">
+        </div>
+        <div class="photo" style="top: 8%; right: 10%; --r: 12deg;">
+            <img src="./images/2.jpg" alt="Memory 2" loading="lazy">
+        </div>
+        <div class="photo" style="bottom: 15%; left: 12%; --r: 10deg;">
+            <img src="./images/3.jpg" alt="Memory 3" loading="lazy">
+        </div>
+        <div class="photo" style="bottom: 18%; right: 12%; --r: -15deg;">
+            <img src="./images/4.png" alt="Memory 4" loading="lazy">
+        </div>
+        <div class="photo" style="top: 28%; left: 15%; --r: 20deg;">
+            <img src="./images/5.jpg" alt="Memory 5" loading="lazy">
+        </div>
+        <div class="photo" style="top: 35%; right: 18%; --r: -18deg;">
+            <img src="./images/6.jpg" alt="Memory 6" loading="lazy">
+        </div>
+    </div>
+
+    <!-- FALLING FLOWERS -->
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 5%; animation-duration: 8s; animation-delay: 0s;">
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 20%; animation-duration: 10s; animation-delay: 1s;">
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 38%; animation-duration: 7s; animation-delay: 2.5s;">
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 55%; animation-duration: 9s; animation-delay: 3s;">
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 72%; animation-duration: 6s; animation-delay: 4s;">
+    <img src="https://img.icons8.com/color/96/flower.png" class="flower" style="left: 90%; animation-duration: 11s; animation-delay: 5s;">
+
+    <!-- CORNER ICONS - LOCKED & SAFE -->
+    <img src="https://img.icons8.com/color/96/scorpio.png" class="scorpio" alt="Scorpio Queen">
+    <img src="https://img.icons8.com/color/96/pill.png" class="pharmacy" alt="Pharmacy Star">
+
+    <!-- CONFETTI EXPLOSION -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script>
-        // Confetti effect
         function launchConfetti() {
             confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#6a0dad', '#1e90ff', '#ff69b4']
+                particleCount: 180,
+                spread: 90,
+                origin: { y: 0.58 },
+                colors: ['#6a0dad', '#1e90ff', '#ff69b4', '#ff1493', '#ffd700', '#ffffff'],
+                scalar: 1.4,
+                ticks: 250,
+                gravity: 0.8
             });
         }
+        // Burst every 2 seconds
         setInterval(launchConfetti, 2000);
+        launchConfetti();
+        setTimeout(launchConfetti, 800);
     </script>
+
+    <!-- OPTIONAL: Birthday Music (uncomment if you want) -->
+    <!--
+    <audio autoplay loop hidden>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-birthday-to-you-2919.mp3" type="audio/mpeg">
+    </audio>
+    -->
 </body>
 </html>
